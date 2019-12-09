@@ -10,11 +10,27 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-
+   
 });
 
 router.post('/', (req, res) => {
+    // insert into () values ()
+    const postData = req.body;
 
+    knex('posts')
+        .insert(postData, "id")
+        .then(ids => {
+            const id = ids [0]
+
+            res.status(200).json(id)
+        })
+    
+        .catch(error => {
+            console.log(error)
+            res.status(500).json({
+                errorMessage: "error getting the post"
+            })
+        })
 });
 
 router.put('/:id', (req, res) => {
